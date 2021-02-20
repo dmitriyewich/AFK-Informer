@@ -4,8 +4,8 @@ script_description("With this simple script you will always know how long you ha
 script_url("https://vk.com/dmitriyewichmods")
 script_dependencies("ffi","encoding", "memory", "vkeys", "mimgui", "lfs", "ziplib")
 script_properties('work-in-pause', 'forced-reloading-only')
-script_version("1.3")
-script_version_number(03)
+script_version("1.4")
+script_version_number(04)
 
 require "lib.moonloader"
 script_properties('work-in-pause')
@@ -18,7 +18,7 @@ local lencoding, encoding = pcall(require, 'encoding') assert(lencoding, 'Librar
 local llfs, lfs = pcall(require, 'lfs')
 local lziplib, ziplib = pcall(ffi.load, string.format("%s/lib/ziplib.dll",getWorkingDirectory()))
 local lvkeys, vkeys = pcall(require, 'vkeys')
-assert(lvkeys, 'Library \'vkeys\' not found.') -- Библиотека с кодами клавиш в удобном формате
+assert(lvkeys, 'Library \'vkeys\' not found.') -- ГЃГЁГЎГ«ГЁГ®ГІГҐГЄГ  Г± ГЄГ®Г¤Г Г¬ГЁ ГЄГ«Г ГўГЁГё Гў ГіГ¤Г®ГЎГ­Г®Г¬ ГґГ®Г°Г¬Г ГІГҐ
 local lwm, wm = pcall(require, 'lib.windows.message')
 encoding.default = 'CP1251'
 local u8 = encoding.UTF8
@@ -325,7 +325,7 @@ if limgui then
 		imgui.GetIO().IniFilename = nil
 	end)
 	infoOK = ''
-	if showwindow[0] and pushwindow[0] then infoOK = 'Нажмите Да, чтобы развернуть игру' else infoOK = '' end
+	if showwindow[0] and pushwindow[0] then infoOK = 'ГЌГ Г¦Г¬ГЁГІГҐ Г„Г , Г·ГІГ®ГЎГ» Г°Г Г§ГўГҐГ°Г­ГіГІГј ГЁГЈГ°Гі' else infoOK = '' end
 	changecmdtext = u8''
 	newFrame = imgui.OnFrame(
 		function() return afk_window[0] end,
@@ -340,7 +340,7 @@ if limgui then
 						imgui.PushStyleVarFloat(imgui.StyleVar.Alpha, (alpha <= 1.0 and alpha or 1.0))
 							imgui.BeginTooltip()
 							imgui.PushTextWrapPos(450)
-								imgui.TextUnformatted(u8'©dmitriyewich aka Валерий Дмитриевич.\nРаспространение допускается только с указанием автора\nПКМ - Открыть группу в вк')
+								imgui.TextUnformatted(u8'В©dmitriyewich aka Г‚Г Г«ГҐГ°ГЁГ© Г„Г¬ГЁГІГ°ГЁГҐГўГЁГ·.\nГђГ Г±ГЇГ°Г®Г±ГІГ°Г Г­ГҐГ­ГЁГҐ Г¤Г®ГЇГіГ±ГЄГ ГҐГІГ±Гї ГІГ®Г«ГјГЄГ® Г± ГіГЄГ Г§Г Г­ГЁГҐГ¬ Г ГўГІГ®Г°Г \nГЏГЉГЊ - ГЋГІГЄГ°Г»ГІГј ГЈГ°ГіГЇГЇГі Гў ГўГЄ')
 							if not imgui.IsItemVisible() and imgui.GetStyle().Alpha == 1.0 then go_CMDserver = nil end
 							imgui.PopTextWrapPos()
 							imgui.EndTooltip()
@@ -350,63 +350,63 @@ if limgui then
 				if not imgui.IsItemHovered() then go_CMDserver = nil end
 				if not imgui.IsAnyItemHovered() and imgui.GetStyle().Alpha == 1.0 then go_hint = nil end
 				if imgui.IsItemClicked(1) then
-					os.execute('explorer "https://vk.com/dmitriyewichmods"') -- открытие браузера с этой ссылкой
+					os.execute('explorer "https://vk.com/dmitriyewichmods"') -- Г®ГІГЄГ°Г»ГІГЁГҐ ГЎГ°Г ГіГ§ГҐГ°Г  Г± ГЅГІГ®Г© Г±Г±Г»Г«ГЄГ®Г©
 				end
 			imgui.SetCursorPosY(imgui.GetCursorPosY() - 3)
-			if imgui.Checkbox(u8'Вкл\\Выкл скрипт', active) then
+			if imgui.Checkbox(u8'Г‚ГЄГ«\\Г‚Г»ГЄГ« Г±ГЄГ°ГЁГЇГІ', active) then
 				config.settings.active = active[0]
 				savejson(convertTableToJsonString(config), "moonloader/config/AFK Informer.json")
 			end
-			if showwindow[0] and pushwindow[0] then infoOK = 'Нажмите Да, чтобы развернуть игру' else infoOK = '' end
-			imgui.SetCursorPosX((imgui.GetWindowWidth() - imgui.CalcTextSize(u8'Текущий таймер: '..config.settings.time.. u8' секунд').x) / 2)
-			imgui.Text(u8"Текущий таймер: "..config.settings.time.. u8' секунд')
+			if showwindow[0] and pushwindow[0] then infoOK = 'ГЌГ Г¦Г¬ГЁГІГҐ Г„Г , Г·ГІГ®ГЎГ» Г°Г Г§ГўГҐГ°Г­ГіГІГј ГЁГЈГ°Гі' else infoOK = '' end
+			imgui.SetCursorPosX((imgui.GetWindowWidth() - imgui.CalcTextSize(u8'Г’ГҐГЄГіГ№ГЁГ© ГІГ Г©Г¬ГҐГ°: '..config.settings.time.. u8' Г±ГҐГЄГіГ­Г¤').x) / 2)
+			imgui.Text(u8"Г’ГҐГЄГіГ№ГЁГ© ГІГ Г©Г¬ГҐГ°: "..config.settings.time.. u8' Г±ГҐГЄГіГ­Г¤')
 			-- imgui.SetCursorPosX((imgui.GetWindowWidth() - 215) / 2)
 			imgui.PushItemWidth(217)
-			if imgui.InputTextWithHint(u8'##ID 2', u8'Введите время в секундах', Timewaitsec, sizeof(Timewaitsec), imgui.InputTextFlags.CharsDecimal + imgui.InputTextFlags.AutoSelectAll + imgui.InputTextFlags.EnterReturnsTrue) then
+			if imgui.InputTextWithHint(u8'##ID 2', u8'Г‚ГўГҐГ¤ГЁГІГҐ ГўГ°ГҐГ¬Гї Гў Г±ГҐГЄГіГ­Г¤Г Гµ', Timewaitsec, sizeof(Timewaitsec), imgui.InputTextFlags.CharsDecimal + imgui.InputTextFlags.AutoSelectAll + imgui.InputTextFlags.EnterReturnsTrue) then
 				config.settings.time = str(Timewaitsec)
 				savejson(convertTableToJsonString(config), "moonloader/config/AFK Informer.json")
 			end
 			imgui.PopItemWidth()
 			imgui.SetCursorPosX((imgui.GetWindowWidth() - 130) / 2)
-			if imgui.Button(u8"Сохранить таймер", imgui.ImVec2(130, 0)) then
+			if imgui.Button(u8"Г‘Г®ГµГ°Г Г­ГЁГІГј ГІГ Г©Г¬ГҐГ°", imgui.ImVec2(130, 0)) then
 				config.settings.time = str(Timewaitsec)
 				savejson(convertTableToJsonString(config), "moonloader/config/AFK Informer.json")
 			end
-			if imgui.Checkbox(u8'Разворачивать окно игры', showwindow) then
+			if imgui.Checkbox(u8'ГђГ Г§ГўГ®Г°Г Г·ГЁГўГ ГІГј Г®ГЄГ­Г® ГЁГЈГ°Г»', showwindow) then
 				config.settings.showwindow = showwindow[0]
 				savejson(convertTableToJsonString(config), "moonloader/config/AFK Informer.json")
 			end
-			if imgui.Checkbox(u8'Показывать окно уведомления', pushwindow) then
+			if imgui.Checkbox(u8'ГЏГ®ГЄГ Г§Г»ГўГ ГІГј Г®ГЄГ­Г® ГіГўГҐГ¤Г®Г¬Г«ГҐГ­ГЁГї', pushwindow) then
 				config.settings.pushwindow = pushwindow[0]
 				savejson(convertTableToJsonString(config), "moonloader/config/AFK Informer.json")
 			end
-			if imgui.Checkbox(u8'Звукое уведомления', soundwindow) then
+			if imgui.Checkbox(u8'Г‡ГўГіГЄГ®ГҐ ГіГўГҐГ¤Г®Г¬Г«ГҐГ­ГЁГї', soundwindow) then
 				config.settings.soundwindow = soundwindow[0]
 				savejson(convertTableToJsonString(config), "moonloader/config/AFK Informer.json")
 			end
-			if imgui.CollapsingHeader(u8'Доп.Настройки') then
+			if imgui.CollapsingHeader(u8'Г„Г®ГЇ.ГЌГ Г±ГІГ°Г®Г©ГЄГЁ') then
 				imgui.SetCursorPosX((imgui.GetWindowWidth() - 210) / 2)
 				imgui.PushItemWidth(210)
-				if imgui.InputTextWithHint(u8'##cmd', u8'Введите команду без "/"', cmdbuffer, sizeof(cmdbuffer), imgui.InputTextFlags.AutoSelectAll) then
+				if imgui.InputTextWithHint(u8'##cmd', u8'Г‚ГўГҐГ¤ГЁГІГҐ ГЄГ®Г¬Г Г­Г¤Гі ГЎГҐГ§ "/"', cmdbuffer, sizeof(cmdbuffer), imgui.InputTextFlags.AutoSelectAll) then
 					config.settings.cmd = str(cmdbuffer)
 					-- savejson(convertTableToJsonString(config), "moonloader/config/AFK Informer.json")
 				end
 					if imgui.IsItemHovered() then
 						imgui.BeginTooltip()
 						imgui.PushTextWrapPos(600)
-							imgui.TextUnformatted(u8'Чтобы изменить команду активации\nвведите команду без "/"')
+							imgui.TextUnformatted(u8'Г—ГІГ®ГЎГ» ГЁГ§Г¬ГҐГ­ГЁГІГј ГЄГ®Г¬Г Г­Г¤Гі Г ГЄГІГЁГўГ Г¶ГЁГЁ\nГўГўГҐГ¤ГЁГІГҐ ГЄГ®Г¬Г Г­Г¤Гі ГЎГҐГ§ "/"')
 						imgui.PopTextWrapPos()
 						imgui.EndTooltip()
 					end
 				imgui.PopItemWidth()
 				imgui.SetCursorPosX((imgui.GetWindowWidth() - 130) / 2)
-				if imgui.Button(u8'Сохранить команду', imgui.ImVec2(130, 0)) then
+				if imgui.Button(u8'Г‘Г®ГµГ°Г Г­ГЁГІГј ГЄГ®Г¬Г Г­Г¤Гі', imgui.ImVec2(130, 0)) then
 					config.settings.cmd = str(cmdbuffer)
 					sampUnregisterChatCommand(config.settings.cmd)
 					savejson(convertTableToJsonString(config), "moonloader/config/AFK Informer.json")
 					sampRegisterChatCommand(config.settings.cmd, function() main_window[0] = not main_window[0] end)
 				if str(cmdbuffer) == nil or str(cmdbuffer) == '' or ffi.string(cmdbuffer) == ' ' or str(cmdbuffer):find('/.+') then
-						changecmdtext = u8'Поле ввода пустое или содержит символ "/"\nВведите команду без "/" '
+						changecmdtext = u8'ГЏГ®Г«ГҐ ГўГўГ®Г¤Г  ГЇГіГ±ГІГ®ГҐ ГЁГ«ГЁ Г±Г®Г¤ГҐГ°Г¦ГЁГІ Г±ГЁГ¬ГўГ®Г« "/"\nГ‚ГўГҐГ¤ГЁГІГҐ ГЄГ®Г¬Г Г­Г¤Гі ГЎГҐГ§ "/" '
 						config.settings.cmd = 'afki'
 						savejson(convertTableToJsonString(config), "moonloader/config/AFK Informer.json")
 					else
@@ -480,7 +480,7 @@ function ShowMessage(text, title)
 				ffi.C.AttachThreadInput(iMyTID, iCurrTID, false)
 			end)
 		else
-			print('Нажато No')
+			print('ГЌГ Г¦Г ГІГ® No')
 		end
 	elseif pushwindow[0] and not showwindow[0] then
 		ffi.C.MessageBoxA(nil, text, title, 0x30 + 0x00002000 + 0x00010000 + 0x00040000)
@@ -492,7 +492,7 @@ function main()
 	if not isSampLoaded() or not isSampfuncsLoaded() then return end
     while not isSampAvailable() do wait(100) end
 	checksound()
-	checklibs() -- эту удалить если не нужна проверка на библиотеки
+	checklibs() -- ГЅГІГі ГіГ¤Г Г«ГЁГІГј ГҐГ±Г«ГЁ Г­ГҐ Г­ГіГ¦Г­Г  ГЇГ°Г®ГўГҐГ°ГЄГ  Г­Г  ГЎГЁГЎГ«ГЁГ®ГІГҐГЄГЁ
 	hwnd = ffi.C.FindWindowA("Grand theft auto San Andreas", nil)
 	if config.settings.cmd == 'afki' then
 		sampRegisterChatCommand('afki', function() afk_window[0] = not afk_window[0] end)
@@ -500,7 +500,7 @@ function main()
 		sampUnregisterChatCommand('afki')
 		sampRegisterChatCommand(config.settings.cmd, function() afk_window[0] = not afk_window[0] end)
 	end
-	sampSetClientCommandDescription(config.settings.cmd, string.format("Активация/деактивация окна %s, Файл: %s", thisScript().name, thisScript().filename))
+	sampSetClientCommandDescription(config.settings.cmd, string.format("ГЂГЄГІГЁГўГ Г¶ГЁГї/Г¤ГҐГ ГЄГІГЁГўГ Г¶ГЁГї Г®ГЄГ­Г  %s, Г”Г Г©Г«: %s", thisScript().name, thisScript().filename))
 	thread1 = lua_thread.create_suspended(secondThread)
 	wait(-1)
 end
@@ -525,7 +525,7 @@ function secondThread()
 	wait(config.settings.time * 1000)
 	if soundwindow[0] then playsound(getWorkingDirectory()..'\\resource\\AFK Informer\\sound.wav'); end
 	if pushwindow[0] then
-		ShowMessage('Вы стоите в афк уже '.. config.settings.time ..' секунд\nВремя начала афк ' .. test ..' \nТекущее время '.. os.date('%X') ..'\n'..infoOK, 'AFK Informer')
+		ShowMessage('Г‚Г» Г±ГІГ®ГЁГІГҐ Гў Г ГґГЄ ГіГ¦ГҐ '.. config.settings.time ..' Г±ГҐГЄГіГ­Г¤\nГ‚Г°ГҐГ¬Гї Г­Г Г·Г Г«Г  Г ГґГЄ ' .. test ..' \nГ’ГҐГЄГіГ№ГҐГҐ ГўГ°ГҐГ¬Гї '.. os.date('%X') ..'\n'..infoOK, 'AFK Informer')
 	end
 	if showwindow[0] and not pushwindow[0] then
 		lua_thread.create(function()
@@ -586,18 +586,18 @@ function memset(addr)
 	end
 end
 
-if lziplib then -- с этой строки и до конца
+if lziplib then -- Г± ГЅГІГ®Г© Г±ГІГ°Г®ГЄГЁ ГЁ Г¤Г® ГЄГ®Г­Г¶Г 
 	function zipextract(script_name)
 		file_path = getWorkingDirectory() .. "\\" .. script_name ..".zip"
 		if doesFileExist(file_path) then
-			print("Распаковка архива: " .. script_name)
+			print("ГђГ Г±ГЇГ ГЄГ®ГўГЄГ  Г Г°ГµГЁГўГ : " .. script_name)
 			local extract_des = string.format("%s\\%s",getWorkingDirectory(),script_name)
 			ziplib.zip_extract(file_path,extract_des,nil,nil)
 			MoveFiles(extract_des,getWorkingDirectory().."\\lib")
 			os.remove(file_path)
-			print("Распаковка прошла успешно, распакован архив: " .. script_name)
+			print("ГђГ Г±ГЇГ ГЄГ®ГўГЄГ  ГЇГ°Г®ГёГ«Г  ГіГ±ГЇГҐГёГ­Г®, Г°Г Г±ГЇГ ГЄГ®ГўГ Г­ Г Г°ГµГЁГў: " .. script_name)
 		else
-			print("Файлы не найдет, перезапустите скрипт.")
+			print("Г”Г Г©Г«Г» Г­ГҐ Г­Г Г©Г¤ГҐГІ, ГЇГҐГ°ГҐГ§Г ГЇГіГ±ГІГЁГІГҐ Г±ГЄГ°ГЁГЇГІ.")
 		end
 	end
 end
@@ -622,7 +622,7 @@ if llfs then
 				end
 				if doesFileExist(dest_file) then
 					os.remove(main_file)
-					print("Невозможно удалить файл " .. dest_file)
+					print("ГЌГҐГўГ®Г§Г¬Г®Г¦Г­Г® ГіГ¤Г Г«ГЁГІГј ГґГ Г©Г« " .. dest_file)
 				else
 					os.rename(main_file,dest_file)
 				end
@@ -636,7 +636,7 @@ end
 function checklibs()
 	if not limgui or not llfs or not lziplib then
 		lua_thread.create(function()
-			print('Подгрузка необходимых библиотек..')
+			print('ГЏГ®Г¤ГЈГ°ГіГ§ГЄГ  Г­ГҐГ®ГЎГµГ®Г¤ГЁГ¬Г»Гµ ГЎГЁГЎГ«ГЁГ®ГІГҐГЄ..')
 			if not lziplib then
 				downloadFile('ziplib', getWorkingDirectory()..'\\lib\\ziplib.dll', 'https://www.dropbox.com/s/uw0huxlf5tkv8ls/ziplib.dll?dl=1')
 				while not doesFileExist(getWorkingDirectory()..'\\lib\\ziplib.dll') do wait(0) end
@@ -658,7 +658,7 @@ function checklibs()
 			else
 				wait(0)
 			end
-			print('Подгрузка необходимых библиотек окончена. Перезагружаюсь..')
+			print('ГЏГ®Г¤ГЈГ°ГіГ§ГЄГ  Г­ГҐГ®ГЎГµГ®Г¤ГЁГ¬Г»Гµ ГЎГЁГЎГ«ГЁГ®ГІГҐГЄ Г®ГЄГ®Г­Г·ГҐГ­Г . ГЏГҐГ°ГҐГ§Г ГЈГ°ГіГ¦Г ГѕГ±Гј..')
 			wait(1000)
 			reloadScripts()
 		end)
@@ -671,7 +671,7 @@ function downloadFile(name, path, link)
 	if not doesFileExist(path) then
 		downloadUrlToFile(link, path, function(id, status, p1, p2)
 			if status == dlstatus.STATUSEX_ENDDOWNLOAD then
-				print('{FFFFFF}Файл {35ab2b}«'..name..'»{FFFFFF} загружен!')
+				print('{FFFFFF}Г”Г Г©Г« {35ab2b}В«'..name..'В»{FFFFFF} Г§Г ГЈГ°ГіГ¦ГҐГ­!')
 			end
 		end)
 	end
