@@ -325,7 +325,7 @@ if limgui then
 		imgui.GetIO().IniFilename = nil
 	end)
 	infoOK = ''
-	if showwindow[0] and pushwindow[0] then infoOK = 'Нажмите Да, чтобы развернуть игру' else infoOK = '' end
+	if showwindow[0] and pushwindow[0] then infoOK = u8:decode'Нажмите Да, чтобы развернуть игру' else infoOK = '' end
 	changecmdtext = ''
 	newFrame = imgui.OnFrame(
 		function() return afk_window[0] end,
@@ -480,7 +480,7 @@ function ShowMessage(text, title)
 				ffi.C.AttachThreadInput(iMyTID, iCurrTID, false)
 			end)
 		else
-			print('Нажато No')
+			print(u8:decode'Нажато No')
 		end
 	elseif pushwindow[0] and not showwindow[0] then
 		ffi.C.MessageBoxA(nil, text, title, 0x30 + 0x00002000 + 0x00010000 + 0x00040000)
@@ -500,7 +500,7 @@ function main()
 		sampUnregisterChatCommand('afki')
 		sampRegisterChatCommand(config.settings.cmd, function() afk_window[0] = not afk_window[0] end)
 	end
-	sampSetClientCommandDescription(config.settings.cmd, string.format("Активация/деактивация окна %s, Файл: %s", thisScript().name, thisScript().filename))
+	sampSetClientCommandDescription(config.settings.cmd, string.format(u8:decode"Активация/деактивация окна %s, Файл: %s", thisScript().name, thisScript().filename))
 	thread1 = lua_thread.create_suspended(secondThread)
 	wait(-1)
 end
@@ -525,7 +525,7 @@ function secondThread()
 	wait(config.settings.time * 1000)
 	if soundwindow[0] then playsound(getWorkingDirectory()..'\\resource\\AFK Informer\\sound.wav'); end
 	if pushwindow[0] then
-		ShowMessage('Вы стоите в афк уже '.. config.settings.time ..' секунд\nВремя начала афк ' .. test ..' \nТекущее время '.. os.date('%X') ..'\n'..infoOK, 'AFK Informer')
+		ShowMessage(u8:decode'Вы стоите в афк уже '.. config.settings.time ..u8:decode' секунд\nВремя начала афк ' .. test ..u8:decode' \nТекущее время '.. os.date('%X') ..'\n'..u8:decode(infoOK), u8:decode'AFK Informer')
 	end
 	if showwindow[0] and not pushwindow[0] then
 		lua_thread.create(function()
@@ -590,14 +590,14 @@ if lziplib then -- с этой строки и до конца
 	function zipextract(script_name)
 		file_path = getWorkingDirectory() .. "\\" .. script_name ..".zip"
 		if doesFileExist(file_path) then
-			print("Распаковка архива: " .. script_name)
+			print(u8:decode"Распаковка архива: " .. script_name)
 			local extract_des = string.format("%s\\%s",getWorkingDirectory(),script_name)
 			ziplib.zip_extract(file_path,extract_des,nil,nil)
 			MoveFiles(extract_des,getWorkingDirectory().."\\lib")
 			os.remove(file_path)
-			print("Распаковка прошла успешно, распакован архив: " .. script_name)
+			print(u8:decode"Распаковка прошла успешно, распакован архив: " .. script_name)
 		else
-			print("Файлы не найдет, перезапустите скрипт.")
+			print(u8:decode"Файлы не найдет, перезапустите скрипт.")
 		end
 	end
 end
@@ -622,7 +622,7 @@ if llfs then
 				end
 				if doesFileExist(dest_file) then
 					os.remove(main_file)
-					print("Невозможно удалить файл " .. dest_file)
+					print(u8:decode"Невозможно удалить файл " .. dest_file)
 				else
 					os.rename(main_file,dest_file)
 				end
@@ -636,7 +636,7 @@ end
 function checklibs()
 	if not limgui or not llfs or not lziplib then
 		lua_thread.create(function()
-			print('Подгрузка необходимых библиотек..')
+			print(u8:decode'Подгрузка необходимых библиотек..')
 			if not lziplib then
 				downloadFile('ziplib', getWorkingDirectory()..'\\lib\\ziplib.dll', 'https://www.dropbox.com/s/uw0huxlf5tkv8ls/ziplib.dll?dl=1')
 				while not doesFileExist(getWorkingDirectory()..'\\lib\\ziplib.dll') do wait(0) end
@@ -658,7 +658,7 @@ function checklibs()
 			else
 				wait(0)
 			end
-			print('Подгрузка необходимых библиотек окончена. Перезагружаюсь..')
+			print(u8:decode'Подгрузка необходимых библиотек окончена. Перезагружаюсь..')
 			wait(1000)
 			reloadScripts()
 		end)
@@ -671,7 +671,7 @@ function downloadFile(name, path, link)
 	if not doesFileExist(path) then
 		downloadUrlToFile(link, path, function(id, status, p1, p2)
 			if status == dlstatus.STATUSEX_ENDDOWNLOAD then
-				print('{FFFFFF}Файл {35ab2b}«'..name..'»{FFFFFF} загружен!')
+				print(u8:decode'{FFFFFF}Файл {35ab2b}«'..name..'»{FFFFFF} загружен!')
 			end
 		end)
 	end
