@@ -1,5 +1,4 @@
 # AFK-Informer
-With this simple script you will always know how long you have spent in AFK. For SAMP.
 Обычный афк информер, но на мимгуи. Есть настройка таймера, уведомление со звуком и(или) окном, разворачивание окна игры.
 
 Активация: /afki.
