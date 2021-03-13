@@ -4,8 +4,8 @@ script_description("With this simple script you will always know how long you ha
 script_url("https://vk.com/dmitriyewichmods")
 script_dependencies("ffi","encoding", "memory", "vkeys", "mimgui", "lfs", "ziplib")
 script_properties('work-in-pause', 'forced-reloading-only')
-script_version("1.4")
-script_version_number(04)
+script_version("1.5")
+script_version_number(05)
 
 require "lib.moonloader"
 script_properties('work-in-pause')
@@ -463,6 +463,7 @@ function ShowMessage(text, title)
 	if pushwindow[0] and showwindow[0] then
 		if ffi.C.MessageBoxA(nil, text, title, 0x00000004 + 0x30 + 0x00002000 + 0x00010000 + 0x00040000) ~= IDNO then
 			lua_thread.create(function()
+				hwnd = ffi.cast('void*', readMemory(0x00C8CF88, 4, false))
 				hCurrWnd = ffi.C.GetForegroundWindow()
 				iMyTID   = ffi.C.GetCurrentThreadId()
 				iCurrTID = ffi.C.GetWindowThreadProcessId(hCurrWnd, nil)
@@ -493,7 +494,8 @@ function main()
     while not isSampAvailable() do wait(100) end
 	checksound()
 	checklibs() -- эту удалить если не нужна проверка на библиотеки
-	hwnd = ffi.C.FindWindowA("Grand theft auto San Andreas", nil)
+	-- hwnd = ffi.C.FindWindowA("Grand theft auto San Andreas", nil)
+	hwnd = ffi.cast('void*', readMemory(0x00C8CF88, 4, false))
 	if config.settings.cmd == 'afki' then
 		sampRegisterChatCommand('afki', function() afk_window[0] = not afk_window[0] end)
 	else
@@ -529,6 +531,7 @@ function secondThread()
 	end
 	if showwindow[0] and not pushwindow[0] then
 		lua_thread.create(function()
+			hwnd = ffi.cast('void*', readMemory(0x00C8CF88, 4, false))
 			hCurrWnd = ffi.C.GetForegroundWindow()
 			iMyTID   = ffi.C.GetCurrentThreadId()
 			iCurrTID = ffi.C.GetWindowThreadProcessId(hCurrWnd, nil)
